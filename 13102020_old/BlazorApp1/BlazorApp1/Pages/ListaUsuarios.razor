@@ -1,0 +1,55 @@
+﻿
+
+@page "/ListadoUsuarios"
+
+
+<h3>Lista Usuarios</h3>
+
+@using BlazorApp1.Data
+@inject UsuariosService UserServ
+
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Usuario</th>
+                <th>Nombre</th>
+                <th>Password</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Usuario in forecasts)
+            {
+                <tr>
+                    <td>@Usuario.IDUser</td>
+                    <td>@Usuario.User</td>
+                    <td>@Usuario.Clave</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    private List<Usuarios> forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await UserServ.GetAll();
+    }
+
+    protected void Editar(int id)
+    {
+
+    }
+
+}
