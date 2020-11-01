@@ -31,7 +31,8 @@ namespace BlazorApp1
             services.AddSingleton<DBCont>();
             services.AddSingleton<TareasService>();
             services.AddSingleton<UsuariosService>();
-            
+            services.AddSingleton<RecursosService>();
+            services.AddSingleton<DetallesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,11 +3,15 @@
 <h3>ListadoTareas</h3>
 @using BlazorApp1.Data
 @inject TareasService TareaServ
+@inject NavigationManager navigation
+@inject IJSRuntime JsRuntime
+
 
 <h1>Listado de Tareas</h1>
 
+<button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
 
-@if (forecasts == null)
+@if (tar == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -16,25 +20,22 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>IDTarea</th>
+
                 <th>Titulo</th>
-                <th>Vencimiento</th>
-                <th>Estimacion</th>
                 <th>Responsable</th>
-                <th>boolean</th>
+                <th>Acciones</th>
+
             </tr>
         </thead>
         <tbody>
-            @foreach (var Tareas in forecasts)
+            @foreach (var Tareas in tar)
             {
-            <tr>
-                <td>@Tareas.IDTarea</td>
-                <td>@Tareas.Titulo</td>
-                <td>@Tareas.Vencimiento</td>
-                <td>@Tareas.Estimacion</td>
-                <td>@Tareas.Responsable</td>
-                <td>@Tareas.bo</td>
-            </tr>
+                <tr>
+
+                    <td>@Tareas.Titulo</td>
+                    <td>@Tareas.Responsable</td>
+                    <td><button class="btn" @onclick="()=>Editar(Tareas.IDTarea)">Editar</button> <button class="btn" @onclick="()=>Borrar(Tareas.IDTarea)">Borrar</button></td>
+                </tr>
             }
         </tbody>
     </table>
@@ -43,12 +44,30 @@ else
 
 @code {
 
-    private Tareas[] forecasts;
+    private List<Tareas> tar;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = TareaServ.GetTareas();
+        tar = await TareaServ.GetAllTareas();
     }
 
 
+
+    protected void Editar(int id)
+    {
+        navigation.NavigateTo("EditarTarea/" + id);
+    }
+
+    async Task Borrar(int id)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Desea eliminar la Tarea?");
+        if (confirmed)
+        {
+            await TareaServ.Borrar(id);
+            tar = await TareaServ.GetAllTareas();
+
+        }
+    }
+
 }
+

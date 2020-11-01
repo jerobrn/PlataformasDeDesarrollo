@@ -7,49 +7,64 @@
 
 @using BlazorApp1.Data
 @inject UsuariosService UserServ
+@inject NavigationManager navigation
+@inject IJSRuntime JsRuntime
 
-
-@if (forecasts == null)
+<h3>Listado</h3>
+<button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
+@if (usuarios == null)
 {
-    <p><em>Loading...</em></p>
+
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>ID Usuario</th>
                 <th>Nombre</th>
-                <th>Password</th>
-
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var Usuario in forecasts)
+            @foreach (var item in usuarios)
             {
                 <tr>
-                    <td>@Usuario.IDUser</td>
-                    <td>@Usuario.User</td>
-                    <td>@Usuario.Clave</td>
+                    <td>@item.User</td>
+                    <td><button class="btn" @onclick="()=>Editar(item.IDUser)">Editar</button> <button class="btn" @onclick="()=>Borrar(item.IDUser)">Borrar</button></td>
                 </tr>
             }
         </tbody>
     </table>
+
 }
+
+
+
+
 
 
 @code {
 
-    private List<Usuarios> forecasts;
+    private List<Usuarios> usuarios;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await UserServ.GetAll();
+        usuarios = await UserServ.GetAll();
     }
 
     protected void Editar(int id)
     {
+        navigation.NavigateTo("EditarUsuario/" + id);
+    }
 
+    async Task Borrar(int id)
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Desea elimiar el usuario?");
+        if (confirmed)
+        {
+            await UserServ.Borrar(id);
+            usuarios = await UserServ.GetAll();
+        }
     }
 
 }
