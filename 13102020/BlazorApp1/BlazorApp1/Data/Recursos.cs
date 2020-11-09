@@ -12,17 +12,16 @@ namespace BlazorApp1.Data
         [Key]
         public int IDRecurso { get; set; }
         public String Nombre { get; set; }
-        public String Usuario { get; set; }
+        public Usuarios Usuario { get; set; }
+        public int IdUsuario { get; set; }
+        public Recursos(){}
 
-        public Recursos()
-        {
-
-        }
-        public Recursos(int iDRecurso, string nombre, string usuario)
+        public Recursos(int iDRecurso, string nombre, Usuarios usuario, int idUsuario)
         {
             IDRecurso = iDRecurso;
             Nombre = nombre;
             Usuario = usuario;
+            IdUsuario = idUsuario;
         }
     }
 }

@@ -12,7 +12,7 @@
 <button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
 
 @if (tar == null)
-{
+{ 
     <p><em>Loading...</em></p>
 }
 else
@@ -23,6 +23,8 @@ else
 
                 <th>Titulo</th>
                 <th>Responsable</th>
+                <th>Estimación</th>
+                <th>Estado</th>
                 <th>Acciones</th>
 
             </tr>
@@ -30,12 +32,18 @@ else
         <tbody>
             @foreach (var Tareas in tar)
             {
-                <tr>
+            <tr>
 
-                    <td>@Tareas.Titulo</td>
-                    <td>@Tareas.Responsable</td>
-                    <td><button class="btn" @onclick="()=>Editar(Tareas.IDTarea)">Editar</button> <button class="btn" @onclick="()=>Borrar(Tareas.IDTarea)">Borrar</button></td>
-                </tr>
+                <td>@Tareas.Titulo</td>
+                <td>@Tareas.IdRecursos</td>
+                <td>@Tareas.Estimacion</td>
+                <td>@Tareas.Estado</td>
+                <td>
+                    <button class="btn" @onclick="()=>Editar(Tareas.IDTarea)">Editar</button>
+                    <button class="btn" @onclick="()=>Detalle(Tareas.IDTarea)">Detalles</button>
+                    <button class="btn" @onclick="()=>Borrar(Tareas.IDTarea)">Borrar</button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -68,6 +76,12 @@ else
 
         }
     }
+    protected void Detalle(int id)
+    {
+
+        navigation.NavigateTo("ListadoDetalles/" + id);
+    }
+
 
 }
 

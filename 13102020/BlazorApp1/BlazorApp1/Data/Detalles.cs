@@ -11,20 +11,23 @@ namespace BlazorApp1.Data
 
         [Key]
         public int IDDetalle { get; set; }
-        public String Fecha { get; set; }
+        public DateTime Fecha { get; set; }
         public String Tiempo { get; set; }
-        public String Recurso { get; set; }
+        public int IdRecursos { get; set; }
+        public Recursos Recurso { get; set; }
+        public int IDTarea { get; set; }
 
-        public Detalles(int iDDetalle, String fecha, String tiempo, String recurso)
+        public Detalles()
+        {
+        }
+
+        public Detalles(int iDDetalle, DateTime fecha, string tiempo, int idRecursos, Recursos recurso)
         {
             IDDetalle = iDDetalle;
             Fecha = fecha;
             Tiempo = tiempo;
+            IdRecursos = idRecursos;
             Recurso = recurso;
-        }
-
-        public Detalles()
-        {
         }
     }
 }

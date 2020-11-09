@@ -12,25 +12,24 @@ namespace BlazorApp1.Data
         [Key]
         public int IDTarea { get; set; }
         public String Titulo { get; set; }
-        public String Vencimiento { get; set; }
+        public DateTime Vencimiento { get; set; }
         public int Estimacion { get; set; }
-        public String Responsable { get; set; }
-        public bool bo { get; set; }
+        public int IdRecursos { get; set; }
+        public Recursos Responsable { get; set; }
 
-        public Tareas(int iDTarea, string titulo, string vencimiento, int estimacion, string responsable, bool bo)
+          public bool Estado { get; set; }
+
+        public Tareas(){}
+
+        public Tareas(int iDTarea, string titulo, DateTime vencimiento, int estimacion, int idRecursos, Recursos responsable, bool estado)
         {
-            
             IDTarea = iDTarea;
             Titulo = titulo;
             Vencimiento = vencimiento;
             Estimacion = estimacion;
+            IdRecursos = idRecursos;
             Responsable = responsable;
-            this.bo = bo;
-        }
-
-        public Tareas()
-        {
-
+            Estado = estado;
         }
     }
 }

@@ -41,6 +41,8 @@ namespace BlazorApp1.Data
         {
             return await context.Detalles.Where(i => i.IDDetalle == id).SingleAsync();
         }
+
+
         public async Task<bool> Borrar(int id)
         {
             var entidad = await context.Detalles.Where(i => i.IDDetalle == id).SingleAsync();
@@ -50,11 +52,16 @@ namespace BlazorApp1.Data
         }
 
 
+        public async Task<List<Recursos>> GetAllRecursos()
+        {
+            return await context.Recursos.ToListAsync();
+        }
 
 
-
-
-
+        public async Task<List<Detalles>> GetDetalles(int id)
+        {
+            return await context.Detalles.Where(i => i.IDTarea == id).ToListAsync();
+        }
 
 
 

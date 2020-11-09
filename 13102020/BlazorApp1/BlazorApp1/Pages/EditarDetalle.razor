@@ -6,10 +6,22 @@
 <EditForm Model="@Modelo" OnValidSubmit="@Guardar">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <label class="alert">Recurso</label>
-    <InputText @bind-Value="Modelo.Recurso" />
-    <label class="alert">Fecha</label>
-    <InputText @bind-Value="Modelo.Fecha" />
+    <div class="form-group row">
+        <InputSelect @bind-Value="RecID">
+            <option value="0">Elija un rol</option>
+            @foreach (var item in rec)
+            {
+                <option value="@item.IDRecurso">@item.Nombre</option>
+            }
+        </InputSelect>
+    </div>
+    <p>
+        <label>
+            Production Date:
+            <InputDate @bind-Value="Modelo.Fecha" />
+        </label>
+    </p>
+
     <label class="alert">Tiempo</label>
     <InputText @bind-Value="Modelo.Tiempo" />
 
@@ -19,26 +31,30 @@
 
 @code {
     [Parameter]
-    public int Id { get; set; }
+    public int id { get; set; }
 
     public Detalles Modelo { get; set; } = new Detalles();
+    private List<Recursos> rec;
+    public string RecID { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        if (Id > 0)
+        if (id > 0)
         {
-            Modelo = await service.Get(Id);
+            Modelo = await service.Get(id);
+            RecID = Modelo.IdRecursos.ToString();
         }
         else
         {
             Modelo = new Detalles();
         }
+        rec = await service.GetAllRecursos();
     }
 
 
     private async void Guardar()
     {
         await service.Save(Modelo);
-        navigation.NavigateTo("ListadoDetalles");
+        navigation.NavigateTo("ListadoTareas/");
     }
 }

@@ -1,14 +1,12 @@
 ﻿
 
 @page "/ListadoRecursos"
-
-
-<h3>Lista Recursos</h3>
-
 @using BlazorApp1.Data
 @inject RecursosService RecServ
 @inject NavigationManager navigation
 @inject IJSRuntime JsRuntime
+
+    <h3>Lista Recursos</h3>
 
 <button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
 @if (rec == null)

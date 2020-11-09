@@ -8,9 +8,15 @@
     <ValidationSummary />
     <label class="alert">Nombre</label>
     <InputText @bind-Value="Modelo.Nombre" />
-    <label class="alert">Usuario</label>
-    <InputText @bind-Value="Modelo.Usuario" />
 
+
+        <InputSelect @bind-Value="iduser">
+            <option value="0">Elija un Usuario</option>
+            @foreach (var item in users)
+            {
+                <option value="@item.IDUser">@item.User</option>
+            }
+        </InputSelect>
     <button type="submit">Guardar</button>
 </EditForm>
 
@@ -21,21 +27,28 @@
 
     public Recursos Modelo { get; set; } = new Recursos();
 
+    public string iduser { get; set; }
+    
+    private List<Usuarios> users;
+
     protected override async Task OnInitializedAsync()
     {
         if (Id > 0)
         {
             Modelo = await service.Get(Id);
+            iduser = Modelo.IdUsuario.ToString();
         }
         else
         {
             Modelo = new Recursos();
         }
+        users = await service.GetUsuarios();
     }
 
 
     private async void Guardar()
     {
+        Modelo.IdUsuario = int.Parse(iduser);
         await service.Save(Modelo);
         navigation.NavigateTo("ListadoRecursos");
     }

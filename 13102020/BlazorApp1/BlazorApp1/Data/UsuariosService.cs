@@ -39,6 +39,8 @@ namespace BlazorApp1.Data
         {
             return await context.Usuarios.Where(i => i.IDUser == id).SingleAsync();
         }
+
+
         public async Task<bool> Borrar(int id)
         {
             var entidad = await context.Usuarios.Where(i => i.IDUser == id).SingleAsync();

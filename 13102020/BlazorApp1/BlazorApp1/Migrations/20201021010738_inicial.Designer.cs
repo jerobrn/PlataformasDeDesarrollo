@@ -3,14 +3,16 @@ using System;
 using BlazorApp1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlazorApp1.Migrations
 {
     [DbContext(typeof(DBCont))]
-    partial class DBContModelSnapshot : ModelSnapshot
+    [Migration("20201021010738_inicial")]
+    partial class inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,12 +26,6 @@ namespace BlazorApp1.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("IDTarea")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IdRecursos")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("RecursoIDRecurso")
                         .HasColumnType("INTEGER");
@@ -48,9 +44,6 @@ namespace BlazorApp1.Migrations
                 {
                     b.Property<int>("IDRecurso")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IdUsuario")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
@@ -72,32 +65,22 @@ namespace BlazorApp1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("DetalleIDDetalle")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Estado")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Estimacion")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdRecursos")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ResponsableIDRecurso")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Responsable")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Titulo")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Vencimiento")
+                    b.Property<string>("Vencimiento")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("bo")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("IDTarea");
-
-                    b.HasIndex("DetalleIDDetalle");
-
-                    b.HasIndex("ResponsableIDRecurso");
 
                     b.ToTable("Tarea");
                 });
@@ -131,17 +114,6 @@ namespace BlazorApp1.Migrations
                     b.HasOne("BlazorApp1.Data.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioIDUser");
-                });
-
-            modelBuilder.Entity("BlazorApp1.Data.Tareas", b =>
-                {
-                    b.HasOne("BlazorApp1.Data.Detalles", "Detalle")
-                        .WithMany()
-                        .HasForeignKey("DetalleIDDetalle");
-
-                    b.HasOne("BlazorApp1.Data.Recursos", "Responsable")
-                        .WithMany()
-                        .HasForeignKey("ResponsableIDRecurso");
                 });
 #pragma warning restore 612, 618
         }

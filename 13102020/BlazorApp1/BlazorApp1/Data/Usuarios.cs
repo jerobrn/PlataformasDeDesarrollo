@@ -15,10 +15,8 @@ namespace BlazorApp1.Data
         public String Clave { get; set; }
 
 
-        public Usuarios()
-        {
- 
-        }
+        public Usuarios(){}
+
         public Usuarios(int iDUser, string user, string clave)
         {
             IDUser = iDUser;

@@ -50,7 +50,10 @@ namespace BlazorApp1.Data
             return true;
         }
 
-
-
+        public async Task<List<Recursos>> GetAllRecursos()
+        {
+            return await context.Recursos.ToListAsync();
+        }
+        
     }
 }
