@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorApp1.Data
+namespace ClassLibrary.Entidades
 {
     public class Detalles
     {
@@ -21,14 +21,13 @@ namespace BlazorApp1.Data
         {
         }
 
-        public Detalles(int iDDetalle, DateTime fecha, string tiempo, int idRecursos, Recursos recurso, int iDTarea)
+        public Detalles(int iDDetalle, DateTime fecha, string tiempo, int idRecursos, Recursos recurso)
         {
             IDDetalle = iDDetalle;
             Fecha = fecha;
             Tiempo = tiempo;
             IdRecursos = idRecursos;
             Recurso = recurso;
-            IDTarea = iDTarea;
         }
     }
 }

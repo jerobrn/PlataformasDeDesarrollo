@@ -1,4 +1,4 @@
-﻿@page "/EditarDetalle/{id:int}"
+﻿@page "/EditarDetalle/{id:int}/{idTarea:int}"
 @using BlazorApp1.Data
 @inject DetallesService service
 @inject NavigationManager navigation
@@ -24,7 +24,7 @@
 
     <label class="alert">Tiempo</label>
     <InputText @bind-Value="Modelo.Tiempo" />
-
+    
     <button type="submit">Guardar</button>
 </EditForm>
 
@@ -32,6 +32,8 @@
 @code {
     [Parameter]
     public int id { get; set; }
+    [Parameter]
+    public int idtarea { get; set; }
 
     public Detalles Modelo { get; set; } = new Detalles();
     private List<Recursos> rec;
@@ -43,18 +45,23 @@
         {
             Modelo = await service.Get(id);
             RecID = Modelo.IdRecursos.ToString();
+
         }
         else
         {
             Modelo = new Detalles();
         }
         rec = await service.GetAllRecursos();
+
     }
 
 
     private async void Guardar()
     {
+        Modelo.IdRecursos = int.Parse(RecID);
+        Modelo.IDTarea = idtarea;
         await service.Save(Modelo);
-        navigation.NavigateTo("ListadoTareas/");
+
+        navigation.NavigateTo("ListadoDetalles/"+ idtarea);
     }
 }

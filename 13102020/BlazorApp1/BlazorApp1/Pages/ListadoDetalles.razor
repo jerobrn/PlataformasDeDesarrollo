@@ -9,7 +9,7 @@
 
     <h1>Detalles</h1>
 
-    <button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
+    <button class="btn" @onclick="()=>Editar(0,Id)">Nuevo</button>
 
     @if (det == null)
     {
@@ -35,7 +35,7 @@
                         <td>@Detalles.IdRecursos</td>
                         <td>@Detalles.Fecha</td>
                         <td>@Detalles.Tiempo</td>
-                        <td><button class="btn" @onclick="()=>Editar(Detalles.IDDetalle)">Editar</button> <button class="btn" @onclick="()=>Borrar(Detalles.IDDetalle)">Borrar</button></td>
+                        <td><button class="btn" @onclick="()=>Editar(Detalles.IDDetalle,0)">Editar</button> <button class="btn" @onclick="()=>Borrar(Detalles.IDDetalle)">Borrar</button></td>
                     </tr>
                 }
             </tbody>
@@ -53,7 +53,7 @@
 
         protected override async Task OnInitializedAsync()
         {
-            
+
 
 
             if (Id > 0)
@@ -64,15 +64,15 @@
             {
                 det = await DetServ.GetAll();
             }
-           
+
 
         }
 
 
 
-        protected void Editar(int id)
+        protected void Editar(int id, int idtarea)
         {
-            navigation.NavigateTo("EditarDetalle/" + id);
+            navigation.NavigateTo("EditarDetalle/" + id + "/" + idtarea);
         }
 
         async Task Borrar(int id)
@@ -81,10 +81,11 @@
             if (confirmed)
             {
                 await DetServ.Borrar(id);
-                det = await DetServ.GetAll();
+                det = await DetServ.GetDetalles(Id);
 
             }
         }
+
 
     }
 
