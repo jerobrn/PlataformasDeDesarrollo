@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-
-
+using Refit;
 
 namespace BlazorApp1.Data
 {
@@ -20,7 +19,13 @@ namespace BlazorApp1.Data
 
         public async Task<List<Tareas>> GetAllTareas()
         {
-            return await context.Tareas.ToListAsync();
+            //  return await context.Tareas.ToListAsync();
+
+            var RemoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
+
+            return await RemoteService.GetTareas();
+
+
         }
 
         public async Task<Tareas> Save(Tareas value)
