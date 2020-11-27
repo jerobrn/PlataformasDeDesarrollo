@@ -24,8 +24,29 @@ namespace WebApplication1.Controllers
             return _context.Usuarios.ToList();
         }
 
+        [HttpGet("{id}")]
+        public Usuarios Get(int id)
+        {
+            return _context.Usuarios.Where(i => i.IDUser == id).Single();
+        }
 
 
+
+        [HttpPost]
+        public IActionResult Post(Usuarios valor)
+        {
+            if (valor.IDUser == 0)
+            {
+                _context.Usuarios.Add(valor);
+            }
+            else
+            {
+                //_context.Usuarios.Attach(valor);
+                _context.Usuarios.Update(valor);
+            }
+            _context.SaveChanges();
+            return Ok(valor);
+        }
 
 
     }

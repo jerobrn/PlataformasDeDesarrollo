@@ -27,5 +27,27 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpGet("{id}")]
+        public Recursos Get(int id)
+        {
+            return _context.Recursos.Where(i => i.IDRecurso == id).Single();
+        }
+
+
+        [HttpPost]
+        public IActionResult Post(Recursos valor)
+        {
+            if (valor.IDRecurso == 0)
+            {
+                _context.Recursos.Add(valor);
+            }
+            else
+            {
+                _context.Recursos.Attach(valor);
+                _context.Recursos.Update(valor);
+            }
+            _context.SaveChanges();
+            return Ok(valor);
+        }
     }
 }

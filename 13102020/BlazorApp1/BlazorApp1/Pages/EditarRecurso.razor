@@ -1,6 +1,7 @@
 ﻿@page "/EditarRecurso/{id:int}"
 @using BlazorApp1.Data
 @inject RecursosService service
+@inject UsuariosService userService
 @inject NavigationManager navigation
 
 <EditForm Model="@Modelo" OnValidSubmit="@Guardar">
@@ -10,13 +11,13 @@
     <InputText @bind-Value="Modelo.Nombre" />
 
 
-        <InputSelect @bind-Value="iduser">
-            <option value="0">Elija un Usuario</option>
-            @foreach (var item in users)
-            {
-                <option value="@item.IDUser">@item.User</option>
-            }
-        </InputSelect>
+    <InputSelect @bind-Value="iduser">
+        <option value="0">Elija un Usuario</option>
+        @foreach (var item in users)
+        {
+            <option value="@item.IDUser">@item.User</option>
+        }
+    </InputSelect>
     <button type="submit">Guardar</button>
 </EditForm>
 
@@ -28,8 +29,8 @@
     public Recursos Modelo { get; set; } = new Recursos();
 
     public string iduser { get; set; }
-    
-    private List<Usuarios> users;
+
+    private List<Usuarios> users = new List<Usuarios>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,7 +43,7 @@
         {
             Modelo = new Recursos();
         }
-        users = await service.GetUsuarios();
+        users = await userService.GetAll();
     }
 
 

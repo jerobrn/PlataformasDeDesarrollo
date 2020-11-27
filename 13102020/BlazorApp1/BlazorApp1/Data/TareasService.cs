@@ -30,6 +30,7 @@ namespace BlazorApp1.Data
 
         public async Task<Tareas> Save(Tareas value)
         {
+            /*
             if (value.IDTarea == 0)
             {
                 await context.Tareas.AddAsync(value);
@@ -40,11 +41,16 @@ namespace BlazorApp1.Data
             }
             await context.SaveChangesAsync();
             return value;
+            */
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
+            return await remoteService.GuardarTareas(value);
         }
 
         public async Task<Tareas> Get(int id)
         {
-            return await context.Tareas.Where(i => i.IDTarea == id).SingleAsync();
+           // return await context.Tareas.Where(i => i.IDTarea == id).SingleAsync();
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
+            return await remoteService.GetTareas(id);
         }
 
         public async Task<bool> Borrar(int id)

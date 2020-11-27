@@ -28,7 +28,7 @@ namespace BlazorApp1.Data
 
         public async Task<Usuarios> Save(Usuarios value)
         {
-            if (value.IDUser == 0)
+           /* if (value.IDUser == 0)
             {
                 await context.Usuarios.AddAsync(value);
             }
@@ -38,11 +38,17 @@ namespace BlazorApp1.Data
             }
             await context.SaveChangesAsync();
             return value;
+           */
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
+            return await remoteService.GuardarUsuario(value);
         }
 
         public async Task<Usuarios> Get(int id)
         {
-            return await context.Usuarios.Where(i => i.IDUser == id).SingleAsync();
+            // return await context.Usuarios.Where(i => i.IDUser == id).SingleAsync();
+
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
+            return await remoteService.GetUsuario(id);
         }
 
 

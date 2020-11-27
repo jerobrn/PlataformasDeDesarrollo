@@ -26,7 +26,35 @@ namespace WebApplication1.Controllers
             return _context.Detalles.ToList();
         }
 
+        [HttpGet("{id}")]
+        public Detalles Get(int id)
+        {
+            return _context.Detalles.Where(i => i.IDDetalle == id).Single();
+        }
 
+        [HttpGet("{id}")]
+        public Detalles GetL(int id)
+        {
+            return _context.Detalles.Where(i => i.IDTarea == id).Single();
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Post(Detalles valor)
+        {
+            if (valor.IDDetalle == 0)
+            {
+                _context.Detalles.Add(valor);
+            }
+            else
+            {
+                _context.Detalles.Attach(valor);
+                _context.Detalles.Update(valor);
+            }
+            _context.SaveChanges();
+            return Ok(valor);
+        }
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page "/EditarTarea/{id:int}"
 @using BlazorApp1.Data
 @inject TareasService service
+@inject RecursosService recService
 @inject NavigationManager navigation
 
 <EditForm Model="@Modelo" OnValidSubmit="@Guardar">
@@ -42,8 +43,8 @@
         </label>
 
     </div>
-    
-   
+
+
     <button type="submit">Guardar</button>
 </EditForm>
 
@@ -51,11 +52,11 @@
 @code {
     [Parameter]
     public int Id { get; set; }
-    private List<Recursos> rec;
+    private List<Recursos> rec = new List<Recursos>();
 
     public Tareas Modelo { get; set; } = new Tareas();
     public string RecID { get; set; }
-   
+
 
 
     protected override async Task OnInitializedAsync()
@@ -64,19 +65,19 @@
         {
             Modelo = await service.Get(Id);
             RecID = Modelo.IdRecursos.ToString();
-           
+
         }
         else
         {
             Modelo = new Tareas();
         }
-        rec = await service.GetAllRecursos();
+        rec = await recService.GetAll();
     }
 
 
     private async void Guardar()
     {
-      
+
         Modelo.IdRecursos = int.Parse(RecID);
         await service.Save(Modelo);
         navigation.NavigateTo("ListadoTareas");

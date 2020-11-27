@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorApp1.Data
 {
-    interface IRemoteService 
+    public interface IRemoteService 
     {
 
         [Get("/Usuarios")]
@@ -23,16 +23,30 @@ namespace BlazorApp1.Data
 
 
         [Post("/Usuarios")]
-        Task<List<Usuarios>> AddUsuarios();
+        Task<Usuarios> GuardarUsuario(Usuarios valor);
 
         [Post("/Recursos")]
-        Task<List<Usuarios>> AddRecursos();
+        Task<Recursos> GuardarRecursos(Recursos valor);
 
         [Post("/Tareas")]
-        Task<List<Usuarios>> AddTareas();
+        Task<Tareas> GuardarTareas(Tareas valor);
 
         [Post("/Detalles")]
-        Task<List<Usuarios>> AddDetalles();
+        Task<Detalles> GuardarDetalles(Detalles valor);
 
+        [Get("/Usuarios/{id}")]
+        Task<Usuarios> GetUsuario(int id);
+
+        [Get("/Recursos/{id}")]
+        Task<Recursos> GetRecursos(int id);
+
+        [Get("/Tareas/{id}")]
+        Task<Tareas> GetTareas(int id);
+
+        [Get("/Detalles/{id}")]
+        Task<Detalles> GetDetalles(int id);
+
+        [Get("/Detalles/{id}")]
+        Task<List<Detalles>> GetDetxTarea(int id);
     }
 }
