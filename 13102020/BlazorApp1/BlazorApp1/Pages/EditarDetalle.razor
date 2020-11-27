@@ -1,4 +1,4 @@
-﻿@page "/EditarDetalle/{id:int}/{idTarea:int}"
+﻿@page "/EditarDetalle/{id:int}"
 @using BlazorApp1.Data
 @inject DetallesService service
 @inject RecursosService recService
@@ -63,6 +63,6 @@
         Modelo.IDTarea = idtarea;
         await service.Save(Modelo);
 
-        navigation.NavigateTo("ListadoDetalles/" + idtarea);
+        navigation.NavigateTo("ListadoDetalles/");
     }
 }

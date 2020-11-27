@@ -33,9 +33,9 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("{id}")]
-        public Detalles GetL(int id)
+        public List<Detalles> GetD(int id)
         {
-            return _context.Detalles.Where(i => i.IDTarea == id).Single();
+            return _context.Detalles.Where(i => i.IDTarea == id).ToList();
         }
 
 

@@ -24,9 +24,12 @@ namespace BlazorApp1.Data
           //  return await context.Detalles.ToListAsync();
 
 
-            var RemoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
+         //   var RemoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
 
-            return await RemoteService.GetDetalles();
+           // return await RemoteService.GetDetalles();
+
+            var remoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
+            return await remoteService.GetDetalles();
         }
 
         public async Task<Detalles> Save(Detalles value)
@@ -64,14 +67,6 @@ namespace BlazorApp1.Data
             return true;
         }
 
-
-        public async Task<List<Detalles>> GetDetalles(int id)
-        {
-            var remoteService = RestService.For<IRemoteService>("https://localhost:44341/api/");
-            return await remoteService.GetDetxTarea(id);
-            
-           // return await context.Detalles.Where(i => i.IDTarea == id).ToListAsync();
-        }
 
 
     }

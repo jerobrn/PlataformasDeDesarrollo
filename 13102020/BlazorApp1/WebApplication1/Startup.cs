@@ -29,10 +29,7 @@ namespace WebApplication1
         {
             services.AddControllers();
             services.AddSingleton<DBCont>();
-            services.AddSingleton<DetallesController>();
-            services.AddSingleton<TareasController>();
-            services.AddSingleton<RecursosController>();
-            services.AddSingleton<UsuariosController>();
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

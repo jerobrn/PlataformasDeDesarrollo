@@ -46,7 +46,5 @@ namespace BlazorApp1.Data
         [Get("/Detalles/{id}")]
         Task<Detalles> GetDetalles(int id);
 
-        [Get("/Detalles/{id}")]
-        Task<List<Detalles>> GetDetxTarea(int id);
     }
 }
