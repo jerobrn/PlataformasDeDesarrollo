@@ -10,8 +10,8 @@
 @inject NavigationManager navigation
 @inject IJSRuntime JsRuntime
 
-<h3>Listado</h3>
-<button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
+
+<button class="btn btn-primary" @onclick="()=>Editar(0)">Nuevo</button>
 @if (usuarios == null)
 {
 
@@ -30,7 +30,8 @@ else
             {
                 <tr>
                     <td>@item.User</td>
-                    <td><button class="btn" @onclick="()=>Editar(item.IDUser)">Editar</button> <button class="btn" @onclick="()=>Borrar(item.IDUser)">Borrar</button></td>
+                    <td><button class="btn btn-primary" @onclick="()=>Editar(item.IDUser)">Editar</button> 
+                    <button class="btn btn-primary" @onclick="()=>Borrar(item.IDUser)">Borrar</button></td>
                 </tr>
             }
         </tbody>

@@ -7,9 +7,9 @@
     @inject IJSRuntime JsRuntime
 
 
-    <h1>Detalles</h1>
+    <h3>Detalles</h3>
 
-    <button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
+    <button class="btn btn-primary" @onclick="()=>Editar(0)">Nuevo</button>
 
     @if (det == null)
     {
@@ -35,7 +35,7 @@
                         <td>@Detalles.IdRecursos</td>
                         <td>@Detalles.Fecha</td>
                         <td>@Detalles.Tiempo</td>
-                        <td><button class="btn" @onclick="()=>Editar(Detalles.IDDetalle)">Editar</button> <button class="btn" @onclick="()=>Borrar(Detalles.IDDetalle)">Borrar</button></td>
+                        <td><button class="btn btn-primary" @onclick="()=>Editar(Detalles.IDDetalle)">Editar</button> <button class="btn btn-primary" @onclick="()=>Borrar(Detalles.IDDetalle)">Borrar</button></td>
                     </tr>
                 }
             </tbody>
