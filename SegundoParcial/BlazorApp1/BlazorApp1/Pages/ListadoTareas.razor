@@ -1,15 +1,14 @@
 ﻿@page "/ListadoTareas"
 
-<h3>ListadoTareas</h3>
 @using BlazorApp1.Data
 @inject TareasService TareaServ
 @inject NavigationManager navigation
 @inject IJSRuntime JsRuntime
 
 
-<h1>Listado de Tareas</h1>
+<h3>Listado de Tareas</h3>
 
-<button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
+<button class="btn btn-primary" @onclick="()=>Editar(0)">Nuevo</button>
 
 @if (tar == null)
 { 
@@ -39,8 +38,8 @@ else
                 <td>@Tareas.Estimacion</td>
                 <td>@Tareas.Estado</td>
                 <td>
-                    <button class="btn" @onclick="()=>Editar(Tareas.IDTarea)">Editar</button>
-                    <button class="btn" @onclick="()=>Borrar(Tareas.IDTarea)">Borrar</button>
+                    <button class="btn btn-primary" @onclick="()=>Editar(Tareas.IDTarea)">Editar</button>
+                    <button class="btn btn-primary" @onclick="()=>Borrar(Tareas.IDTarea)">Borrar</button>
                 </td>
             </tr>
             }

@@ -8,7 +8,7 @@
 
     <h3>Lista Recursos</h3>
 
-<button class="btn" @onclick="()=>Editar(0)">Nuevo</button>
+<button class="btn btn-primary" @onclick="()=>Editar(0)">Nuevo</button>
 @if (rec == null)
 {
 
@@ -29,7 +29,8 @@ else
             <tr>
                 <td>@item.Nombre</td>
                 <td>@item.Usuario</td>
-                <td><button class="btn" @onclick="()=>Editar(item.IDRecurso)">Editar</button> <button class="btn" @onclick="()=>Borrar(item.IDRecurso)">Borrar</button></td>
+                <td><button class="btn btn-primary" @onclick="()=>Editar(item.IDRecurso)">Editar</button> 
+                <button class="btn btn-primary" @onclick="()=>Borrar(item.IDRecurso)">Borrar</button></td>
             </tr>
             }
         </tbody>
