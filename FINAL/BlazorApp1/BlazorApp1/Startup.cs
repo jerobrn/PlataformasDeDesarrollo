@@ -28,11 +28,11 @@ namespace BlazorApp1
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<DBCont>();
-            services.AddSingleton<TareasService>();
-            services.AddSingleton<UsuariosService>();
-            services.AddSingleton<RecursosService>();
-            services.AddSingleton<DetallesService>();
+            services.AddSingleton<TareasDbContext>();
+            services.AddSingleton<TareaService>();
+            services.AddSingleton<UsuarioService>();
+            services.AddSingleton<DetalleService>();
+            services.AddSingleton<RecursoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

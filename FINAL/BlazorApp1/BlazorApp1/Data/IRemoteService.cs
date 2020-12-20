@@ -1,50 +1,65 @@
-﻿using Refit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Refit;
 
 namespace BlazorApp1.Data
 {
-    public interface IRemoteService 
+    interface IRemoteService
     {
-
-        [Get("/Usuarios")]
-        Task<List<Usuarios>> GetUsuarios();
         
-        [Get("/Recursos")]
-        Task<List<Recursos>> GetRecursos();
+        [Get("/Tarea")]
+        Task<List<Tarea>> GetAllTarea();
 
-        [Get("/Tareas")]
-        Task<List<Tareas>> GetTareas();
+        [Get("/Tarea/{id}")]
+        Task<Tarea> GetTarea(int id);
 
-        [Get("/Detalles")]
-        Task<List<Detalles>> GetDetalles();
+        [Post("/Tarea")]
+        Task<Tarea> GuardarTarea(Tarea valor);
 
+        [Delete("/Tarea/{id}")]
+        Task<Tarea> BorrarTarea(int id);
 
-        [Post("/Usuarios")]
-        Task<Usuarios> GuardarUsuario(Usuarios valor);
+        
+        [Get("/Usuario")]
+        Task<List<Usuario>> GetAllUsuario();
 
-        [Post("/Recursos")]
-        Task<Recursos> GuardarRecursos(Recursos valor);
+        [Get("/Usuario/{id}")]
+        Task<Usuario> GetUsuario(int id);
 
-        [Post("/Tareas")]
-        Task<Tareas> GuardarTareas(Tareas valor);
+        
 
-        [Post("/Detalles")]
-        Task<Detalles> GuardarDetalles(Detalles valor);
+        [Post("/Usuario")]
+        Task<Usuario> GuardarUsuario(Usuario valor);
 
-        [Get("/Usuarios/{id}")]
-        Task<Usuarios> GetUsuario(int id);
+        [Delete("/Usuario/{id}")]
+        Task<Usuario> BorrarUsuario(int id);
 
-        [Get("/Recursos/{id}")]
-        Task<Recursos> GetRecursos(int id);
+      
+        [Get("/Detalle")]
+        Task<List<Detalle>> GetAllDetalle();
 
-        [Get("/Tareas/{id}")]
-        Task<Tareas> GetTareas(int id);
+        [Get("/Detalle/{id}")]
+        Task<Detalle> GetDetalle(int id);
 
-        [Get("/Detalles/{id}")]
-        Task<Detalles> GetDetalles(int id);
+        [Post("/Detalle")]
+        Task<Detalle> GuardarDetalle(Detalle valor);
 
+        [Delete("/Detalle/{id}")]
+        Task<Detalle> BorrarDetalle(int id);
+
+       
+        [Get("/Recurso")]
+        Task<List<Recurso>> GetAllRecurso();
+
+        [Get("/Recurso/{id}")]
+        Task<Recurso> GetRecurso(int id);
+
+        [Post("/Recurso")]
+        Task<Recurso> GuardarRecurso(Recurso valor);
+
+        [Delete("/Recurso/{id}")]
+        Task<Recurso> BorrarRecurso(int id);
     }
 }
